@@ -20,7 +20,7 @@ function setup()   {
   }
 
 function draw() {
-    img(keyboard,0,0);
+    image(keyboard,0,0);
 }
 
 var released = true;

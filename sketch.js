@@ -22,7 +22,7 @@ function setup()   {
 function draw() {
     image(keyboard,0,0);
     textSize(18);
-    text("TinyKeys v.0.01 Max Neupert, 2017",10,410);
+    text("TinyKeys v.0.02 Max Neupert, 2017",10,410);
 }
 
 var released = true;

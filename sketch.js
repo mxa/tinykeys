@@ -20,7 +20,7 @@ function setup()   {
   }
 
 function draw() {
-    background(keyboard);
+    img(keyboard,0,0);
 }
 
 var released = true;
@@ -49,4 +49,4 @@ function mousePressed(){
       if (index>-1){
         sounds[index].play();
       }
-  }
+}

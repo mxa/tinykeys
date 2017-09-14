@@ -1,5 +1,6 @@
 # tinykeys
 Optimized chromatic Keyboards for small, non-tactile Surfaces
+A live demo of this code should be accessible at https://mxa.github.io/tinykeys/
 
 # Licenses
 

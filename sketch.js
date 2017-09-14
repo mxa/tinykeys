@@ -32,9 +32,10 @@ function mousePressed()
       note=((red(note))/5);
     //  print("color:"+(note)+" red"+red(note)+" alpha"+alpha(note));
     //  print("red: "+red(note)+"note: "+note);
-      print("note: "+note);
       midi = note+52
       index = note-1;
-      print("MIDI: "+midi);
-      sounds[index].play();
+      print("note: "+note+", MIDI: "+midi+", index: "+index);
+      if (index>-1){
+        sounds[index].play();
+      }
   }

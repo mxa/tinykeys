@@ -13,7 +13,7 @@ function preload() {
     sounds[i] = loadSound(FOLDER + (i + INDEX_START) + EXT);
 }
 function setup()   {
-    createCanvas(1920,384);
+    createCanvas(displayWidth,384);
     colorMode(RGB, 255);
     keyboard=loadImage("keyboard.png");
     keycolormap=loadImage("keycolormap.png");     

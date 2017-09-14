@@ -25,12 +25,16 @@ function draw() {
 
 function mousePressed()
   {
-    var note;  
+    var note;
+    var midi;
+    var index;
       note=keycolormap.get(mouseX,mouseY); //get the color in the hidden image
       note=((red(note))/5);
     //  print("color:"+(note)+" red"+red(note)+" alpha"+alpha(note));
     //  print("red: "+red(note)+"note: "+note);
+      print("note: "+note);
       midi = note+52
+      index = note-1;
       print("MIDI: "+midi);
-      sounds[note].play();
+      sounds[index].play();
   }

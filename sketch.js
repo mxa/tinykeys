@@ -4,7 +4,7 @@ var keyboard;        //image of the keyboard (visible)
 var keycolormap;     //colormap of the keys (hidden)
 
 const FOLDER = 'keys/', EXT = '.wav',
-      INDEX_START = 53, INDEX_END = 77,
+      INDEX_START = 53, INDEX_END = 79,
       INDEX_TOTAL = 1 + INDEX_END - INDEX_START,
       sounds = Array(INDEX_TOTAL);
  

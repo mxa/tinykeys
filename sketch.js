@@ -13,7 +13,7 @@ function preload() {
     sounds[i] = loadSound(FOLDER + (i + INDEX_START) + EXT);
 }
 function setup()   {
-    createCanvas(displayWidth,384);
+    createCanvas(displayWidth,displayWidth/4);
     colorMode(RGB, 255);
     keyboard=loadImage("keyboard.png");
     keycolormap=loadImage("keycolormap.png");     
@@ -21,6 +21,8 @@ function setup()   {
 
 function draw() {
     image(keyboard,0,0);
+    textSize(18);
+    text("TinyKeys v.0.01 Max Neupert, 2017",10,410);
 }
 
 var released = true;

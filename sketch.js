@@ -23,8 +23,19 @@ function draw() {
     background(keyboard);
 }
 
-function mousePressed()
-  {
+var released = true;
+
+function mouseReleased(){
+	released = true;
+	return false;
+}
+
+function mousePressed(){
+	
+	if(!released){
+		return;
+	}
+	released = false;
     var note;
     var midi;
     var index;

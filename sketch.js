@@ -2,6 +2,7 @@
 
 var keyboard;        //image of the keyboard (visible)
 var keycolormap;     //colormap of the keys (hidden)
+var cnv;
 
 const FOLDER = 'keys/', EXT = '.wav',
       INDEX_START = 53, INDEX_END = 79,
@@ -12,12 +13,26 @@ function preload() {
   for (let i = 0; i < INDEX_TOTAL; ++i)
     sounds[i] = loadSound(FOLDER + (i + INDEX_START) + EXT);
 }
+
+function centerCanvas() {
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  cnv.position(x, y);
+}
+
+
 function setup()   {
-    createCanvas(1920,430);
+    cnv = createCanvas(1920,430);
+    centerCanvas();
+     //canvas.parent('keyboard');
     colorMode(RGB, 255);
     keyboard=loadImage("keyboard.png");
     keycolormap=loadImage("keycolormap.png");     
   }
+
+function windowResized() {
+  centerCanvas();
+}
 
 function draw() {
     image(keyboard,0,0);

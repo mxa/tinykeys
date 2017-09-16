@@ -24,20 +24,23 @@ function centerCanvas() {
 function setup()   {
     cnv = createCanvas(1920,430);
     centerCanvas();
-     //canvas.parent('keyboard');
+    // canvas.parent('keyboard');
     colorMode(RGB, 255);
     keyboard=loadImage("keyboard.png");
     keycolormap=loadImage("keycolormap.png");     
   }
 
-function windowResized() {
-  centerCanvas();
-}
-
 function draw() {
     image(keyboard,0,0);
     textSize(18);
-    text("TinyKeys v.0.02 Max Neupert, 2017",10,410);
+    text("TinyKeys v.0.03 Max Neupert, 2017",10,410);
+}
+
+function touchStarted () {
+  var fs = fullscreen();
+  if (!fs) {
+    fullscreen(true);
+  }
 }
 
 var released = true;

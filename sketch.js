@@ -36,12 +36,12 @@ function draw() {
     text("TinyKeys v.0.03 Max Neupert, 2017",10,410);
 }
 
-function touchStarted () {
-  var fs = fullscreen();
-  if (!fs) {
-    fullscreen(true);
-  }
-}
+//function touchStarted () {
+//  var fs = fullscreen();
+//  if (!fs) {
+//    fullscreen(true);
+//  }
+//}
 
 var released = true;
 
@@ -55,6 +55,7 @@ function mousePressed(){
 	if(!released){
 		return;
 	}
+    
 	released = false;
     var note;
     var midi;

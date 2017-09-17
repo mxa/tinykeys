@@ -12,36 +12,34 @@ const FOLDER = 'keys/', EXT = '.wav',
 function preload() {
   for (let i = 0; i < INDEX_TOTAL; ++i)
     sounds[i] = loadSound(FOLDER + (i + INDEX_START) + EXT);
+    keyboard=loadImage("keyboard.png");
+    keycolormap=loadImage("keycolormap.png");
 }
 
-function centerCanvas() {
-  var x = (windowWidth - width) / 2;
-  var y = (windowHeight - height) / 2;
-  cnv.position(x, y);
-}
-
+var imageRatio;
 
 function setup()   {
-    cnv = createCanvas(1920,430);
-    centerCanvas();
-    // canvas.parent('keyboard');
+    createCanvas(windowWidth, windowHeight);
     colorMode(RGB, 255);
-    keyboard=loadImage("keyboard.png");
-    keycolormap=loadImage("keycolormap.png");     
+
+    imageRatio = keyboard.height/keyboard.width;
+    print("imageRatio: "+imageRatio);
   }
 
+var keyboardWidth;
+var keyboardHeight;
+var scaleFactor;
+
 function draw() {
-    image(keyboard,0,0);
+    background(255);
+    keyboardWidth = windowWidth;
+    keyboardHeight = keyboardWidth*imageRatio;
+    scaleFactor = keyboardWidth/keyboard.width;
+    print("scaleFactor: "+scaleFactor);
+    image(keyboard,0,0,keyboardWidth,keyboardHeight);
     textSize(18);
     text("TinyKeys v.0.03 Max Neupert, 2017",10,410);
 }
-
-//function touchStarted () {
-//  var fs = fullscreen();
-//  if (!fs) {
-//    fullscreen(true);
-//  }
-//}
 
 var released = true;
 
@@ -51,7 +49,6 @@ function mouseReleased(){
 }
 
 function mousePressed(){
-	
 	if(!released){
 		return;
 	}
@@ -60,10 +57,8 @@ function mousePressed(){
     var note;
     var midi;
     var index;
-      note=keycolormap.get(mouseX,mouseY); //get the color in the hidden image
+      note=keycolormap.get(mouseX/scaleFactor,mouseY/scaleFactor); //get the color in the hidden image
       note=((red(note))/5);
-    //  print("color:"+(note)+" red"+red(note)+" alpha"+alpha(note));
-    //  print("red: "+red(note)+"note: "+note);
       midi = note+52
       index = note-1;
       print("note: "+note+", MIDI: "+midi+", index: "+index);

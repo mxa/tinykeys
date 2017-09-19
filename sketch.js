@@ -33,7 +33,7 @@ function draw() {
     background(255);
     image(kbdcopy,0,0);
     textSize(18);
-    text("TinyKeys v.0.05 Max Neupert, 2017",10,kbdcopy.height+25);
+    text("TinyKeys v.0.06 Max Neupert, 2017",10,kbdcopy.height+25);
 }
 
 function windowResized() {
@@ -50,6 +50,7 @@ function windowResized() {
 
 
 // INTERACTION AND SOUND PLAYING
+function touchStarted(){}  //an empty function to stop the default behavior of panning screen
 
 var released = true;
 

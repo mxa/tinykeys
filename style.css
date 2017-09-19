@@ -8,16 +8,12 @@ p{
     margin-left: 10px;
 }
 .center {
-  margin: 0;
-  display: flex;
-
-  /* This centers our sketch horizontally. */
-  justify-content: center;
-
-  /* This centers our sketch vertically. */
-  align-items: center;
+  margin-top: 0px;
+  margin-bottom: auto;
+  top:0;
 }
 .under{
-    justify-content:flex-end;
+    position:absolute;
+    bottom:20px;
     
 }

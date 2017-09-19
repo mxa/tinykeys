@@ -1,8 +1,12 @@
 /* @pjs preload="keyboard.png,keycolormap.png"; */
 
-var keyboard;        //image of the keyboard (visible)
-var keycolormap;     //colormap of the keys (hidden)
-var cnv;
+var keyboard,       //image of the keyboard
+    kbdcopy,        //resized image of the keyboard (visible)
+    keycolormap,    //colormap of the keys (hidden)
+    imageRatio,     //ratio of the image h/w    
+    keyboardWidth,  
+    keyboardHeight,
+    scaleFactor = 1;    //scaling factor of the image
 
 const FOLDER = 'keys/', EXT = '.wav',
       INDEX_START = 53, INDEX_END = 79,
@@ -12,34 +16,38 @@ const FOLDER = 'keys/', EXT = '.wav',
 function preload() {
   for (let i = 0; i < INDEX_TOTAL; ++i)
     sounds[i] = loadSound(FOLDER + (i + INDEX_START) + EXT);
-    keyboard=loadImage("keyboard.png");
+    keyboard=loadImage("keyboard.png", img => kbdcopy = img.get());
     keycolormap=loadImage("keycolormap.png");
 }
-
-var imageRatio;
 
 function setup()   {
     createCanvas(windowWidth, windowHeight);
     colorMode(RGB, 255);
-
     imageRatio = keyboard.height/keyboard.width;
-    print("imageRatio: "+imageRatio);
+    //print("imageRatio: "+imageRatio);
   }
-
-var keyboardWidth;
-var keyboardHeight;
-var scaleFactor;
 
 function draw() {
     background(255);
-    keyboardWidth = windowWidth;
-    keyboardHeight = keyboardWidth*imageRatio;
-    scaleFactor = keyboardWidth/keyboard.width;
-    print("scaleFactor: "+scaleFactor);
-    image(keyboard,0,0,keyboardWidth,keyboardHeight);
+    image(kbdcopy,0,0);
     textSize(18);
-    text("TinyKeys v.0.03 Max Neupert, 2017",10,410);
+    text("TinyKeys v.0.04 Max Neupert, 2017",10,410);
 }
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    if (windowWidth < keyboard.width){
+        kbdcopy = keyboard.get();
+        kbdcopy.resize(windowWidth,0);
+        keyboardWidth = windowWidth;
+        keyboardHeight = keyboardWidth*imageRatio;
+        scaleFactor = keyboardWidth/keyboard.width;
+        print("new scaleFactor: "+scaleFactor);
+        }
+}
+
+
+// INTERACTION AND SOUND PLAYING
 
 var released = true;
 
@@ -66,3 +74,4 @@ function mousePressed(){
         sounds[index].play();
       }
 }
+

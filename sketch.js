@@ -5,7 +5,7 @@ var keyboard,       //image of the keyboard
     keycolormap,    //colormap of the keys (hidden)
     imageRatio,     //ratio of the image h/w    
     keyboardWidth,  
-    keyboardHeight,
+    //keyboardHeight,
     scaleFactor = 1;    //scaling factor of the image
 
 const FOLDER = 'keys/', EXT = '.wav',
@@ -14,8 +14,9 @@ const FOLDER = 'keys/', EXT = '.wav',
       sounds = Array(INDEX_TOTAL);
  
 function preload() {
-  for (let i = 0; i < INDEX_TOTAL; ++i)
-    sounds[i] = loadSound(FOLDER + (i + INDEX_START) + EXT);
+    for (let i = 0; i < INDEX_TOTAL; ++i){
+        sounds[i] = loadSound(FOLDER + (i + INDEX_START) + EXT);
+    }
     keyboard=loadImage("keyboard.png", img => kbdcopy = img.get());
     keycolormap=loadImage("keycolormap.png");
 }
@@ -40,9 +41,9 @@ function windowResized() {
         kbdcopy = keyboard.get();
         kbdcopy.resize(windowWidth,0);
         keyboardWidth = windowWidth;
-        keyboardHeight = keyboardWidth*imageRatio;
+        //keyboardHeight = keyboardWidth*imageRatio;
         scaleFactor = keyboardWidth/keyboard.width;
-        print("new scaleFactor: "+scaleFactor);
+        //print("new scaleFactor: "+scaleFactor);
         }
 }
 
@@ -69,7 +70,7 @@ function mousePressed(){
       note=((red(note))/5);
       midi = note+52
       index = note-1;
-      print("note: "+note+", MIDI: "+midi+", index: "+index);
+      //print("note: "+note+", MIDI: "+midi+", index: "+index);
       if (index>-1){
         sounds[index].play();
       }

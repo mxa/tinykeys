@@ -18,31 +18,36 @@
         <p>Go <button id="toggle">Fullscreen</button></p>
         <p>TinyKeys source code is available at <a href="https://github.com/mxa/tinykeys">github/mxa/tinykeys</a></p>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
     <script src="addons/screenfull.min.js"></script>
     <script>
         document.fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen;
 
-function requestFullscreen(element) {
-	if (element.requestFullscreen) {
-		element.requestFullscreen();
-	} else if (element.mozRequestFullScreen) {
-		element.mozRequestFullScreen();
-	} else if (element.webkitRequestFullScreen) {
-		element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-	}
-}
+        function requestFullscreen(element) {
+	       if (element.requestFullscreen) {
+		      element.requestFullscreen();
+	       } else if (element.mozRequestFullScreen) {
+		      element.mozRequestFullScreen();
+	       } else if (element.webkitRequestFullScreen) {
+		      element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+	       }
+        }   
 
-if (document.fullscreenEnabled) {
-	requestFullscreen(document.documentElement);
-}
+        if (document.fullscreenEnabled) {
+	       requestFullscreen(document.documentElement);
+        }
         const el = document.getElementById('keyboard');
         document.getElementById('toggle').addEventListener('click', () => {
             if (screenfull.enabled) {
                 screenfull.request(el);
-                }
-
+            }
         });
+        if (screenfull.enabled) {
+	       screenfull.on('change', () => {
+		      windowResized();
+              console.log('Am I fullscreen?', screenfull.isFullscreen ? 'Yes' : 'No');
+	       });
+        }
     </script>
   </body>
 </html>

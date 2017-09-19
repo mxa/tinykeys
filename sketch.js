@@ -34,7 +34,7 @@ function draw() {
     background(255);
     image(kbdcopy,0,0);
     textSize(18);
-    text("TinyKeys v.0.07 Max Neupert, 2017",10,kbdcopy.height+25);
+    text("TinyKeys v.0.08 Max Neupert, 2017",10,kbdcopy.height+25);
 }
 
 function windowResized() {

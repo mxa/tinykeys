@@ -4,6 +4,9 @@ html, body {
   margin: 0;
 }
 
+p{
+    margin-left: 10px;
+}
 .center {
   margin: 0;
   display: flex;
@@ -16,4 +19,5 @@ html, body {
 }
 .under{
     justify-content:flex-end;
+    
 }

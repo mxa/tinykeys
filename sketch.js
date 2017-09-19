@@ -26,13 +26,14 @@ function setup()   {
     colorMode(RGB, 255);
     imageRatio = keyboard.height/keyboard.width;
     //print("imageRatio: "+imageRatio);
+    windowResized();
   }
 
 function draw() {
     background(255);
     image(kbdcopy,0,0);
     textSize(18);
-    text("TinyKeys v.0.04 Max Neupert, 2017",10,410);
+    text("TinyKeys v.0.05 Max Neupert, 2017",10,kbdcopy.height+25);
 }
 
 function windowResized() {

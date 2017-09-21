@@ -6,13 +6,16 @@ var keyboard,       //image of the keyboard
     imageRatio,     //ratio of the image h/w    
     keyboardWidth,  
     //keyboardHeight,
+    keys = new Array(),
     scaleFactor = 1;    //scaling factor of the image
 
 const FOLDER = 'keys/', EXT = '.wav',
       INDEX_START = 53, INDEX_END = 79,
       INDEX_TOTAL = 1 + INDEX_END - INDEX_START,
       sounds = Array(INDEX_TOTAL);
- 
+
+sounds.playMode(restart);
+
 function preload() {
     for (let i = 0; i < INDEX_TOTAL; ++i){
         sounds[i] = loadSound(FOLDER + (i + INDEX_START) + EXT);
@@ -34,7 +37,9 @@ function draw() {
     background(255);
     image(kbdcopy,0,0);
     textSize(18);
+    fill(150);
     text("TinyKeys v.0.08 Max Neupert, 2017",10,kbdcopy.height+25);
+    touching();
 }
 
 function windowResized() {
@@ -49,10 +54,33 @@ function windowResized() {
         }
 }
 
-
 // INTERACTION AND SOUND PLAYING
 
-//function touchStarted(){}  //an empty function to stop the default behavior of panning screen
+function touchStarted(){}  //an empty function to stop the default behavior of panning screen
+
+// TOUCH
+function touching(){
+    var note;
+    var midi;
+    var index;
+    fill(255,100,50,100);
+    noStroke();
+	for (var i = 0; i < touches.length; i ++) {
+        ellipse(touches[i].x, touches[i].y, 100)
+        note=keycolormap.get(touches[i].x/scaleFactor,touches[i].y/scaleFactor); //get the color in the hidden image
+        note=((red(note))/5);
+        midi = note+52
+        index = note-1;
+        //print("note: "+note+", MIDI: "+midi+", index: "+index);
+        if (index>-1){
+            sounds[index].play();
+        }
+    }    
+}
+
+
+// MOUSE
+/* Deactivated. Needs some kind of switch to activate this part when on the desktop
 
 var released = true;
 
@@ -70,13 +98,14 @@ function mousePressed(){
     var note;
     var midi;
     var index;
-      note=keycolormap.get(mouseX/scaleFactor,mouseY/scaleFactor); //get the color in the hidden image
-      note=((red(note))/5);
-      midi = note+52
-      index = note-1;
-      //print("note: "+note+", MIDI: "+midi+", index: "+index);
-      if (index>-1){
+    note=keycolormap.get(mouseX/scaleFactor,mouseY/scaleFactor); //get the color in the hidden image
+    note=((red(note))/5);
+    midi = note+52
+    index = note-1;
+    //print("note: "+note+", MIDI: "+midi+", index: "+index);
+    if (index>-1){
         sounds[index].play();
-      }
+    }
 }
+*/
 

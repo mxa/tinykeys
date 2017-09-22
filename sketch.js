@@ -37,20 +37,21 @@ function setup()   {
 function draw() {
     background(255);
     image(kbdcopy,0,0);
-    textSize(18);
+    textSize(17);
     fill(150);
-    text("TinyKeys v.0.12 Max Neupert, 2017",10,kbdcopy.height+25);
+    text("TinyKeys v.0.13 Max Neupert, 2017",10,kbdcopy.height+25);
 //    text("touches: "+touches.length,10,kbdcopy.height+45);
 //    text("keysdown: ",10,kbdcopy.height+65);
 //    for (var i=0;i<keysdown.length;i++){
-//        text(keysdown[i]+",",100+(i*30),kbdcopy.height+65);
+//        text(keysdown[i]+",",100+(i*26),kbdcopy.height+65);
 //    }
 //        text("previouskeysdown: ",10,kbdcopy.height+85);
 //    for (var i=0;i<previouskeysdown.length;i++){
-//        text(previouskeysdown[i]+",",180+(i*30),kbdcopy.height+85);
+//        text(previouskeysdown[i]+",",160+(i*26),kbdcopy.height+85);
 //    }
     touching();
     playing();
+    muting();
 }
 
 function windowResized() {
@@ -79,7 +80,7 @@ function touching(){
     arrayCopy(keysdown,previouskeysdown); //copy old array
     keysdown = []; //delete old array
 	for (var i = 0; i < touches.length; i++) {
-        ellipse(touches[i].x, touches[i].y, 100)
+        ellipse(touches[i].x, touches[i].y, 85)
         note=keycolormap.get(touches[i].x/scaleFactor,touches[i].y/scaleFactor); //get the color in the hidden image
         note=((red(note))/5);
         //midi = note+52
@@ -100,7 +101,24 @@ function playing(){
                 if (previouskeysdown.includes(keysdown[i])){ //check if the key was previosly touched
                     // well, if so, don't trigger again then (empty if clause...)
                 }
-                else{sounds[note].play();} // if it is a new touch, well then play.
+                else{
+                    sounds[note].setVolume(0.5);
+                    sounds[note].play(); // if it is a new touch, well then play.
+                } 
+            
+    }
+}
+function muting(){
+    var note;
+    for (var i = 0; i <previouskeysdown.length; i++){
+            note=previouskeysdown[i];
+                if (previouskeysdown.includes(keysdown[i])){ //check if the key was previosly touched
+                    // well, if so, then keep it playing (empty if clause...)
+                }
+                else{
+                    sounds[note].fade(0,0.1);
+                    sounds[note].stop(0.1); // if it is not touched any more, then stop.
+                } 
             
     }
 }

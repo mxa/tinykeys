@@ -83,7 +83,10 @@ function playing(){
     for (var i = 0; i <keysdown.length; i++){
             note=keysdown[i];
             if (keysdown[i]>-1){
-                sounds[note].play();
+                if (previouskeysdown.includes(keysdown[i])){ //check if the key was previosly touched
+                    // well, if so, don't trigger again then (empty if clause...)
+                }
+                else{sounds[note].play();} // if it is a new touch, well then play.
             }
     }
 }

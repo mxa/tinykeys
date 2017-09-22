@@ -6,7 +6,8 @@ var keyboard,       //image of the keyboard
     imageRatio,     //ratio of the image h/w    
     keyboardWidth,  
     //keyboardHeight,
-    keys = new Array(),
+    keysdown = new Array(),
+    previouskeysdown = new Array(),
     scaleFactor = 1;    //scaling factor of the image
 
 const FOLDER = 'keys/', EXT = '.wav',
@@ -14,7 +15,7 @@ const FOLDER = 'keys/', EXT = '.wav',
       INDEX_TOTAL = 1 + INDEX_END - INDEX_START,
       sounds = Array(INDEX_TOTAL);
 
-sounds.playMode(restart);
+//sounds.playMode(restart); // for some reason this throws an error even though it's in the sound.p5,js reference
 
 function preload() {
     for (let i = 0; i < INDEX_TOTAL; ++i){
@@ -38,8 +39,9 @@ function draw() {
     image(kbdcopy,0,0);
     textSize(18);
     fill(150);
-    text("TinyKeys v.0.08 Max Neupert, 2017",10,kbdcopy.height+25);
+    text("TinyKeys v.0.10 Max Neupert, 2017",10,kbdcopy.height+25);
     touching();
+    playing();
 }
 
 function windowResized() {
@@ -61,21 +63,29 @@ function touchStarted(){}  //an empty function to stop the default behavior of p
 // TOUCH
 function touching(){
     var note;
-    var midi;
-    var index;
+    //var midi;
     fill(255,100,50,100);
     noStroke();
-	for (var i = 0; i < touches.length; i ++) {
+    arrayCopy(keysdown,previouskeysdown); //copy old array
+    keysdown = []; //delete old array
+	for (var i = 0; i < touches.length; i++) {
         ellipse(touches[i].x, touches[i].y, 100)
         note=keycolormap.get(touches[i].x/scaleFactor,touches[i].y/scaleFactor); //get the color in the hidden image
         note=((red(note))/5);
-        midi = note+52
-        index = note-1;
-        //print("note: "+note+", MIDI: "+midi+", index: "+index);
-        if (index>-1){
-            sounds[index].play();
-        }
-    }    
+        //midi = note+52
+        note = note-1;
+        keysdown.push(note);
+    }
+}
+
+function playing(){
+    var note;
+    for (var i = 0; i <keysdown.length; i++){
+            note=keysdown[i];
+            if (keysdown[i]>-1){
+                sounds[note].play();
+            }
+    }
 }
 
 

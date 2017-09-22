@@ -39,7 +39,16 @@ function draw() {
     image(kbdcopy,0,0);
     textSize(18);
     fill(150);
-    text("TinyKeys v.0.10 Max Neupert, 2017",10,kbdcopy.height+25);
+    text("TinyKeys v.0.12 Max Neupert, 2017",10,kbdcopy.height+25);
+//    text("touches: "+touches.length,10,kbdcopy.height+45);
+//    text("keysdown: ",10,kbdcopy.height+65);
+//    for (var i=0;i<keysdown.length;i++){
+//        text(keysdown[i]+",",100+(i*30),kbdcopy.height+65);
+//    }
+//        text("previouskeysdown: ",10,kbdcopy.height+85);
+//    for (var i=0;i<previouskeysdown.length;i++){
+//        text(previouskeysdown[i]+",",180+(i*30),kbdcopy.height+85);
+//    }
     touching();
     playing();
 }
@@ -66,6 +75,7 @@ function touching(){
     //var midi;
     fill(255,100,50,100);
     noStroke();
+    previouskeysdown = [];
     arrayCopy(keysdown,previouskeysdown); //copy old array
     keysdown = []; //delete old array
 	for (var i = 0; i < touches.length; i++) {
@@ -74,20 +84,24 @@ function touching(){
         note=((red(note))/5);
         //midi = note+52
         note = note-1;
-        keysdown.push(note);
+        if (note>-1){
+            keysdown.push(note);
+        }
     }
+    if (touches.length==0){
+         keysdown = [];
+        }
 }
 
 function playing(){
     var note;
     for (var i = 0; i <keysdown.length; i++){
             note=keysdown[i];
-            if (keysdown[i]>-1){
                 if (previouskeysdown.includes(keysdown[i])){ //check if the key was previosly touched
                     // well, if so, don't trigger again then (empty if clause...)
                 }
                 else{sounds[note].play();} // if it is a new touch, well then play.
-            }
+            
     }
 }
 

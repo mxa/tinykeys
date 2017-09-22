@@ -1,6 +1,9 @@
 # tinykeys
 Optimized chromatic Keyboards for small, non-tactile Surfaces
 A live demo of this code should be accessible at https://mxa.github.io/tinykeys/
+It's written in P5.js / javaScript.
+Kudos to jeremydouglass, TfGuy44 and GoToLoop from the processing forum and Dan Shiffmann for these codingtrain videos.
+
 
 # Licenses
 
@@ -13,7 +16,6 @@ All soundfiles (in the keys directory) are by jobro published on freesound.org u
 Createive Commons Attribution 3.0 Unported (CC BY 3.0) License
 
 ## Software
-Is written in P5.js / javaScript.
 All code in this repository is released under the GNU LESSER GENERAL PUBLIC LICENSE license.
 
 Refer to the LICENSE file for the full texts of the licenses.

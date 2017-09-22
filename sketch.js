@@ -79,7 +79,7 @@ function touching(){
     previouskeysdown = [];
     arrayCopy(keysdown,previouskeysdown); //copy old array
     keysdown = []; //delete old array
-	for (var i = 0; i < touches.length; i++) {
+	for (let i = 0; i < touches.length; i++) {
         ellipse(touches[i].x, touches[i].y, 85)
         note=keycolormap.get(touches[i].x/scaleFactor,touches[i].y/scaleFactor); //get the color in the hidden image
         note=((red(note))/5);
@@ -96,7 +96,7 @@ function touching(){
 
 function playing(){
     var note;
-    for (var i = 0; i <keysdown.length; i++){
+    for (let i = 0; i <keysdown.length; i++){
             note=keysdown[i];
                 if (previouskeysdown.includes(keysdown[i])){ //check if the key was previosly touched
                     // well, if so, don't trigger again then (empty if clause...)
@@ -110,7 +110,7 @@ function playing(){
 }
 function muting(){
     var note;
-    for (var i = 0; i <previouskeysdown.length; i++){
+    for (let i = 0; i <previouskeysdown.length; i++){
             note=previouskeysdown[i];
                 if (previouskeysdown.includes(keysdown[i])){ //check if the key was previosly touched
                     // well, if so, then keep it playing (empty if clause...)

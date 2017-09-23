@@ -35,10 +35,10 @@ function setup()   {
   }
 
 function draw() {
-    background(255);
+    background(160,160,170);
     image(kbdcopy,0,0);
     textSize(17);
-    fill(150);
+    fill(105);
     text("TinyKeys v.0.13 Max Neupert, 2017",10,kbdcopy.height+25);
 //    text("touches: "+touches.length,10,kbdcopy.height+45);
 //    text("keysdown: ",10,kbdcopy.height+65);
